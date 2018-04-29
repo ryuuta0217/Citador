@@ -143,7 +143,7 @@ class Citador {
   
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.3";              }
+  getVersion      () { return "1.7.4";              }
   getAuthor       () { return "Nirewen";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
@@ -314,10 +314,10 @@ class Citador {
                   if ($('.quote-msg .message-group').length > 0)
                     $('.quote-msg .message-group').remove();
                   else
-                    $('.channelTextArea-1HTP3C').prepend('<div class="quote-msg"></div>');
+                    $('.channelTextArea-1LDbYG').prepend('<div class="quote-msg"></div>');
                   
                   this.createQuote();
-                  $('.channelTextArea-1HTP3C').focus();
+                  $('.channelTextArea-1LDbYG').focus();
                 });
             }
           })
@@ -334,7 +334,7 @@ class Citador {
     if (this.quoteProps) {
       this.attachParser();
       
-      $('.channelTextArea-1HTP3C').prepend(this.quoteMsg);
+      $('.channelTextArea-1LDbYG').prepend(this.quoteMsg);
       
       if (!this.canChat()) {
         $('.quote-msg').find('.citar-btn.hidden:not(.cant-embed)').toggleClass('hidden cant-embed');
@@ -355,7 +355,7 @@ class Citador {
   }
   
   attachParser() {
-    var el = $('.channelTextArea-1HTP3C');
+    var el = $('.channelTextArea-1LDbYG');
     if (el.length == 0) return;
     
     const handleKeypress = (e) => {
@@ -400,7 +400,7 @@ class Citador {
           author    = msg.author,
           avatarURL = author.getAvatarURL(),
           color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
-          msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1HTP3C textarea').val()),
+          msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()),
           text      = messages.map(m => m.content).join('\n'),
           atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
           chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
@@ -499,7 +499,7 @@ class Citador {
         
         author    = msg.author,
         color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
-        content   = this.MessageParser.parse(cc, $('.channelTextArea-1HTP3C textarea').val()).content,
+        content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
         text      = messages.map(m => m.content).join('\n'),
         atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
         chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
