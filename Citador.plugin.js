@@ -137,7 +137,7 @@ class Citador {
               reset: 'Remettre à zéro'
             }
           };
-        }
+        };
       default: 
         return {
           description: "Quotes somebody in chat",
@@ -391,7 +391,7 @@ class Citador {
       if (code !== 13) return;
       
       try {
-        if (this.settings.useFallbackCodeblock == 1 || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer()))
+        if (this.settings.useFallbackCodeblock == 1 || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer() ? PluginUtilities.getCurrentServer().id))
           this.sendTextQuote(e);
         else
           this.sendEmbedQuote(e);
@@ -706,19 +706,19 @@ class Citador {
   generateSettings(panel) {
     const defaultForm = 
       `<div class="citador ui-form-item flexChild-1KGW5q">
-        <h5 class="h5 h5-3KssQU"></h5>
-        <div class="description description-3MVziF formText-1L-zZB margin-bottom-8 modeDefault-389VjU primary-2giqSn"></div>
+        <h5 class="h5 h5-18_1nd"></h5>
+        <div class="description"></div>
       </div>`;
     panel.append(
       $(defaultForm)
         .css('padding-top', '10px')
         .find('.h5')
-        .toggleClass('title-1pmpPr size12-1IGJl9 height16-1qXrGy weightSemiBold-T8sxWH defaultMarginh5-2UwwFY marginBottom8-1mABJ4')
+        .toggleClass('title-3sZWYQ size12-3R0845 height16-2Lv3qA weightSemiBold-NJexzi defaultMarginh5-2mL-bP marginBottom8-AtZOdT')
         .html(this.local.settings.mentionUser.title)
         .parent()
         .find('.description')
         .html(this.local.settings.mentionUser.description)
-        .toggleClass('ui-flex flex-horizontal flex-justify-start flex-align-stretch flex-nowrap')
+        .toggleClass('description-3_Ncsb formText-3fs7AJ marginBottom8-AtZOdT modeDefault-3a2Ph1 primary-jw0I4K')
         .append(
           new PluginSettings.Checkbox(this.local.settings.mentionUser.title, this.local.settings.mentionUser.description, this.settings.mentionUser, value => {
             this.settings.mentionUser = value;
@@ -728,11 +728,11 @@ class Citador {
         .parent(),
       $(defaultForm)
         .find('.h5')
-        .toggleClass('title-1pmpPr size12-1IGJl9 height16-1qXrGy weightSemiBold-T8sxWH defaultMarginh5-2UwwFY marginBottom8-1mABJ4')
+        .toggleClass('title-3sZWYQ size12-3R0845 height16-2Lv3qA weightSemiBold-NJexzi defaultMarginh5-2mL-bP marginBottom8-AtZOdT')
         .html(this.local.settings.useFallbackCodeblock.title)
         .parent()
         .append(
-          $('<div class="radioGroup-2P3MJo">')
+          $('<div class="radioGroup-1GBvlr">')
           .append(
             this.local.settings.useFallbackCodeblock.choices.map((choice, i) =>
               this.Checkbox(choice, this.settings.useFallbackCodeblock, i)
@@ -742,11 +742,12 @@ class Citador {
       $(defaultForm)
         .css('padding-top', '10px')
         .find('.h5')
-        .toggleClass('title-1pmpPr size12-1IGJl9 height16-1qXrGy weightSemiBold-T8sxWH defaultMarginh5-2UwwFY marginBottom8-1mABJ4')
+        .toggleClass('title-3sZWYQ size12-3R0845 height16-2Lv3qA weightSemiBold-NJexzi defaultMarginh5-2mL-bP marginBottom8-AtZOdT')
         .html(this.local.settings.disableServers.title)
         .parent()
         .find('.description')
         .html(this.local.settings.disableServers.description)
+        .toggleClass('description-3_Ncsb formText-3fs7AJ marginBottom8-AtZOdT modeDefault-3a2Ph1 primary-jw0I4K')
         .parent()
         .append(
           $('<div class="citador-guilds">').append(
@@ -772,7 +773,7 @@ class Citador {
         .css('padding-top', '10px')
         .append(
           $(`<button type="button">`)
-            .toggleClass('buttonRedFilledDefault-1TrZ9q buttonFilledDefault-AELjWf buttonDefault-2OLW-v button-2t3of8 buttonFilled-29g7b5 buttonRedFilled-1NjJNj mediumGrow-uovsMu')
+            .toggleClass('button-38aScr lookFilled-1Gx00P colorRed-1TFJan sizeMedium-1AC_Sl grow-q77ONN')
             .css({
               'margin': '0 auto'
             })
@@ -783,10 +784,10 @@ class Citador {
   }
   
   Checkbox(value, setting, type) {
-    let checkbox = $(`<div class="item-2zi_5J marginBottom8-1mABJ4 horizontal-2VE-Fw flex-3B1Tl4 directionRow-yNbSvJ cardPrimaryEditable-2IQ7-V card-3DrRmC" style="padding: 10px;">
-      <label class="checkboxWrapper-2Yvr_Y">
-        <input type="checkbox" class="inputDefault-2tiBIA input-oWyROL" value="on">
-        <div class="checkbox-1QwaS4 center-1MLNrE flex-3B1Tl4 justifyCenter-29N31w alignCenter-3VxkQP box-XhjOl4">
+    let checkbox = $(`<div class="item-26Dhrx marginBottom8-AtZOdT horizontal-2EEEnY flex-1O1GKY directionRow-3v3tfG cardPrimaryEditable-3KtE4g card-3Qj_Yx" style="padding: 10px;">
+      <label class="checkboxWrapper-SkhIWG">
+        <input type="checkbox" class="inputDefault-3JxKJ2 input-3ITkQf">
+        <div class="checkbox-1ix_J3 flexCenter-3_1bcw flex-1O1GKY justifyCenter-3D2jYp alignCenter-1dQNNs box-mmYMsp">
           <svg name="Checkmark" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fill-rule="evenodd">
               <polyline stroke="transparent" stroke-width="2" points="3.5 9.5 7 13 15 5"></polyline>
@@ -794,8 +795,8 @@ class Citador {
           </svg>
         </div>
       </label>
-      <div class="info-1Z508c">
-        <div class="title-1M-Ras">${value}</div>
+      <div class="info-3LOr12">
+        <div class="title-3BE6m5">${value}</div>
       </div>
     </div>`);
     if (setting == type) {
@@ -804,15 +805,15 @@ class Citador {
           'border-color': 'rgb(114, 137, 218)',
           'background-color': 'rgb(114, 137, 218)'
         })
-        .find('.checkbox-1QwaS4')
-        .toggleClass('checked-2TahvT')
+        .find('.checkbox-1ix_J3')
+        .toggleClass('checked-3_4uQ9')
         .css('border-color', 'rgb(114, 137, 218)')
       checkbox
         .find('polyline')
         .attr('stroke', '#7289da')
       checkbox
-        .find('.title-1M-Ras')
-        .toggleClass('titleChecked-3Ngoss')
+        .find('.title-3BE6m5')
+        .toggleClass('titleChecked-2wg0pd')
         .css('color', 'rgb(255, 255, 255)');
       return checkbox;
     } else {
