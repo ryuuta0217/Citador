@@ -110,6 +110,34 @@ class Citador {
             reset: '設定をリセット'
           }
         };
+      case 'fr':
+        {
+          return {
+            description: "Cite un message du chat",
+            startMsg: "Lancé",
+            quoteTooltip: "Citer",
+            deleteTooltip: "Supprimer",
+            noPermTooltip: "Vous n'avez pas la permission de citer",
+            noChatTooltip: "Vous n'avez pas la permission d'envoyer un message",
+            attachment: "Message attaché",
+            settings: {
+              mentionUser: {
+                title: 'Mentionner l\'utilisateur cité',
+                description: 'Choisir de mentionner l\'utilisateur ou non. Vous pouvez aussi cliquer sur l\'avatar de l\'utilisateur cité.'
+              },
+              useFallbackCodeblock: {
+                title: "Utiliser le format \"codeblock\"",
+                choices: ["Jamais", "Toujours", "Seulement quand je n'ai pas les permissions"]
+              },
+              disableServers: {
+                title: "Désactiver les citations en embed pour certains serveurs",
+                description: "Cliquez sur un serveur pour désactiver les citation en embed. Re-cliquez pour les réactiver.</br>Vous pouvez aussi faire un click droit pour basculer.",
+                context: "Embed quotes"
+              },
+              reset: 'Remettre à zéro'
+            }
+          };
+        }
       default: 
         return {
           description: "Quotes somebody in chat",
@@ -143,7 +171,7 @@ class Citador {
   
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.4";              }
+  getVersion      () { return "1.7.5";              }
   getAuthor       () { return "Nirewen";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
