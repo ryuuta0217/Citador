@@ -391,7 +391,7 @@ class Citador {
       if (code !== 13) return;
       
       try {
-        if (this.settings.useFallbackCodeblock == 1 || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer() ? PluginUtilities.getCurrentServer().id))
+        if (this.settings.useFallbackCodeblock == 1 || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer() ? PluginUtilities.getCurrentServer().id : null))
           this.sendTextQuote(e);
         else
           this.sendEmbedQuote(e);
