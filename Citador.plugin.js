@@ -1,182 +1,28 @@
 //META{"name":"Citador"}*//
 
+/* global $, PluginUtilities, PluginTooltip, ReactUtilities, InternalUtilities, PluginContextMenu, PluginSettings, Element */
+
 class Citador {
   
   /** LOCALE **/
   
   get local() {
-    switch (document.documentElement.getAttribute('lang').split('-')[0]) {
-      case 'pt':
-        return {
-          description: "Cita alguém no chat",
-          startMsg: "Iniciado",
-          quoteTooltip: "Citar",
-          deleteTooltip: "Excluir",
-          noPermTooltip: "Sem permissão para citar",
-          noChatTooltip: "Sem permissão para enviar mensagens",
-          attachment: "Anexo",
-          settings: {
-            mentionUser: {
-              title: 'Mencionar o usuário citado',
-              description: 'Mencionar ou não o usuário que se está citando. Você pode clicar no avatar dele no preview para adicionar a menção à mensagem.'
-            },
-            useFallbackCodeblock: {
-              title: "Usar citação em formato de bloco de código",
-              choices: ["Nunca", "Sempre", "Somente quando sem permissão"]
-            },
-            disableServers: {
-              title: "Desabilitar citação em embed para servidores específicos",
-              description: "Clique em um servidor para desabilitar citações em embed para ele. Clique novamente para habilitar.</br>Você também pode clicar com o botão direito em um servidor e habilitar ou desabilitar por lá.",
-              context: "Citação em embed"
-            },
-            reset: 'Redefinir configurações'
-          }
-        };
-      case 'de': 
-        return {
-          description: "Zitiert jemanden im Chat mithilfe von eingebetten Nachrichten",
-          startMsg: "Gestartet",
-          quoteTooltip: "Zitieren",
-          deleteTooltip: "Löschen",
-          noPermTooltip: "Keine Rechte zum Zitieren",
-          noChatTooltip: "Keine Rechte Nachrichten zu senden",
-          attachment: "Anhang",
-          settings: {
-            mentionUser: {
-              title: 'Mention the quoted user',
-              description: 'Whether to mention the quoted user or not. You can also click their avatar to attach their mention to your message.'
-            },
-            useFallbackCodeblock: {
-              title: "Im Code-Format senden",
-              choices: ["Niemals", "Immer", "Nur, falls keine Berechtigung"]
-            },
-            disableServers: {
-              title: "Deaktiviere Zitate für spezielle Server",
-              description: "Klicke auf einen Server um Zitate zu deaktivieren. Klicke erneut zum Aktivieren.</br>Du kannst auch auf einen Server rechtsklicken zum Umschalten.",
-              context: "Zitate einbetten"
-            },
-            reset: 'Einstellungen zurücksetzten'
-          }
-        };
-      case 'ru': 
-        return {
-          description: "Позволяет цитировать сообщения",
-          startMsg: "Запущен",
-          quoteTooltip: "Цитировать",
-          deleteTooltip: "Удалить",
-          noPermTooltip: "Нет прав для цитирования",
-          noChatTooltip: "Нет прав для отправки сообщений",
-          attachment: "Вложение",
-          settings: {
-            mentionUser: {
-              title: 'Упоминать цитируемого пользователя',
-              description: 'Переключает упоминание пользователя при цитировании. Вы так же можете нажать на аватарку цитируемого пользователя, чтобы упомянуть его.'
-            },
-            useFallbackCodeblock: {
-              title: "Форматировать цитаты блоками кода",
-              choices: ["Никогда", "Всегда", "Только если нет нужных прав"]
-            },
-            disableServers: {
-              title: "Отключить встраивание цитат для отдельных серверов",
-              description: "Нажмите на иконку сервера, чтобы отключить встраивание. Нажмите снова, чтобы включить.</br>Вы так же можете нажать ПКМ по иконке, чтобы изменить настройки оттуда.",
-              context: "Встраивание цитат"
-            },
-            reset: 'Сбросить настройки'
-          }
-        };
-      case 'ja': 
-        return {
-          description: "チャットメッセージを引用します。",
-          startMsg: "起動完了",
-          quoteTooltip: "引用",
-          deleteTooltip: "削除",
-          noPermTooltip: "引用する権限がありません",
-          noChatTooltip: "このチャンネルでメッセージを送信する権利がありません",
-          attachment: "添付ファイル",
-          settings: {
-            mentionUser: {
-              title: '引用されたユーザーにメンションを飛ばす',
-              description: '引用されたユーザーにメンションを送るかどうかの設定です。アバターアイコンをクリックしてもメンションを追加できます。'
-            },
-            useFallbackCodeblock: {
-              title: "引用にコードブロックを使用する",
-              choices: ["絶対に行わない", "常に行う", "権限が無いときのみ使用する"]
-            },
-            disableServers: {
-              title: "指定したサーバーでEmbedの引用を無効化します",
-              description: "サーバーをクリックするとEmbedの引用が無効になります。もう一度クリックすることで再度有効になります。</br>ギルドを右クリックすることで切り替えることもできます。",
-              context: "Embedの引用"
-            },
-            reset: '設定をリセット'
-          }
-        };
-      case 'fr':
-        {
-          return {
-            description: "Cite un message du chat",
-            startMsg: "Lancé",
-            quoteTooltip: "Citer",
-            deleteTooltip: "Supprimer",
-            noPermTooltip: "Vous n'avez pas la permission de citer",
-            noChatTooltip: "Vous n'avez pas la permission d'envoyer un message",
-            attachment: "Message attaché",
-            settings: {
-              mentionUser: {
-                title: 'Mentionner l\'utilisateur cité',
-                description: 'Choisir de mentionner l\'utilisateur ou non. Vous pouvez aussi cliquer sur l\'avatar de l\'utilisateur cité.'
-              },
-              useFallbackCodeblock: {
-                title: "Utiliser le format \"codeblock\"",
-                choices: ["Jamais", "Toujours", "Seulement quand je n'ai pas les permissions"]
-              },
-              disableServers: {
-                title: "Désactiver les citations en embed pour certains serveurs",
-                description: "Cliquez sur un serveur pour désactiver les citation en embed. Re-cliquez pour les réactiver.</br>Vous pouvez aussi faire un click droit pour basculer.",
-                context: "Embed quotes"
-              },
-              reset: 'Remettre à zéro'
-            }
-          };
-        };
-      default: 
-        return {
-          description: "Quotes somebody in chat",
-          startMsg: "Started",
-          quoteTooltip: "Quote",
-          deleteTooltip: "Delete",
-          noPermTooltip: "No permission to quote",
-          noChatTooltip: "No permission to send messages",
-          attachment: "Attachment",
-          settings: {
-            mentionUser: {
-              title: 'Mention the quoted user',
-              description: 'Whether to mention the quoted user or not. You can also click their avatar to attach their mention to your message.'
-            },
-            useFallbackCodeblock: {
-              title: "Use codeblock quote format",
-              choices: ["Never", "Always", "Only when without permission"]
-            },
-            disableServers: {
-              title: "Disable embed quotes for specific servers",
-              description: "Click a server to disable embed quotes for it. Click again to enable.</br>You can also right-click a guild and toggle it.",
-              context: "Embed quotes"
-            },
-            reset: 'Reset settings'
-          }
-        };
-    };
+    if (this.strings)
+      return this.strings[document.documentElement.getAttribute('lang').split('-')[0]] || this.strings.en;
+    else
+      return {};
   }
   
   /** BD FUNCTIONS **/
   
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.5";              }
+  getVersion      () { return "1.7.6";              }
   getAuthor       () { return "Nirewen";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
   load            () {                              }
-  start           () {
+  async start     () {
     let libraryScript = this.inject('script', {
       type: 'text/javascript',
       id: 'zeresLibraryScript',
@@ -186,13 +32,15 @@ class Citador {
       type: 'text/css',
       id: 'citador-css',
       rel: 'stylesheet',
-      href: 'https://cdn.rawgit.com/nirewen/Citador/master/Citador.styles.css'
+      href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css'
     });
+	
+    this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
 
     if (typeof window.ZeresLibrary !== "undefined") 
       this.initialize();
     else 
-      libraryScript.addEventListener("load", () => { this.initialize(); });
+      libraryScript.addEventListener("load", () => this.initialize());
   }
   
   initialize() {
@@ -211,6 +59,24 @@ class Citador {
     this.quoteURL          = 'https://github.com/nirewen/Citador?';
     this.CDN_URL           = 'https://cdn.discordapp.com/avatars/';
     this.ASSETS_URL        = 'https://discordapp.com';
+	
+    /* 
+      Forcing guilds to be blocked in Citador.
+      
+      * You shall not change this unless you 
+        want to be banned from these servers 
+        (or from Discord)
+        
+      CONTRIBUTORS: 
+      - To add more Discord Official servers IDs to this list
+      * Currently in the list:
+        - BetterDiscord²
+        - BetterDiscord
+        - Discord API
+        - Discord Testers
+        - Discord HypeSquad
+    */
+    this.forcedGuilds = ['280806472928198656', '86004744966914048', '81384788765712384', '197038439483310086', '200661830648070145'];
   
     this.loadSettings();
     this.patchExternalLinks();
@@ -231,10 +97,7 @@ class Citador {
                 .click(function() {
                   self.attachParser();
                   
-                  let message   = $(this).parents('.message-group'),
-                    mInstance = ReactUtilities.getOwnerInstance($(".messages-wrapper")[0]),
-                    channel   = mInstance.props.channel,
-                    range;
+                  let message   = $(this).parents('.message-group'), range;
                   
                   self.quoteProps = $.extend(true, {}, ReactUtilities.getOwnerInstance(message[0]).props);
                     
@@ -275,7 +138,7 @@ class Citador {
                     // define a função de clique, pra deletar uma mensagem que você não deseja citar
                     $('.quote-msg').find('.delete-msg-btn')
                       .click(function() {
-                        self.removeQuoteAtIndex($('.quote-msg .message').index($('.quote-msg .message').has(this)), () => deleteTooltip.remove());
+                        self.removeQuoteAtIndex($('.quote-msg .message').index($('.quote-msg .message').has(this)));
                       })
                       .each(function() {
                         new PluginTooltip.Tooltip($(this), self.local.deleteTooltip);
@@ -391,7 +254,14 @@ class Citador {
       if (code !== 13) return;
       
       try {
-        if (this.settings.useFallbackCodeblock == 1 || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer() ? PluginUtilities.getCurrentServer().id : null))
+        if (this.settings.useFallbackCodeblock == 1 
+            || !this.canEmbed() && this.settings.useFallbackCodeblock == 2 
+            || this.settings.disabledServers.includes(PluginUtilities.getCurrentServer() 
+                ? PluginUtilities.getCurrentServer().id 
+                : null)
+            || this.forcedGuilds.includes(PluginUtilities.getCurrentServer() 
+                ? PluginUtilities.getCurrentServer().id 
+                : null))
           this.sendTextQuote(e);
         else
           this.sendEmbedQuote(e);
@@ -416,7 +286,7 @@ class Citador {
   sendEmbedQuote(e) {
     var props = this.quoteProps;
     if (props) {
-      if (e.shiftKey || $('.autocomplete-1TnWNR').length >= 1) return;
+      if (e.shiftKey || $('.autocomplete-1vrmpx').length >= 1) return;
     
       var messages  = props.messages.filter(m => !m.deleted),
           guilds    = this.guilds,
@@ -484,7 +354,7 @@ class Citador {
         }
       }
       
-      var msg = this.MessageParser.createMessage(cc.id, msgCnt.content);
+      let message = this.MessageParser.createMessage(cc.id, msgCnt.content);
       
       this.MessageQueue.enqueue({
         type: "send",
@@ -492,7 +362,7 @@ class Citador {
           channelId: cc.id,
           content: msgCnt.content,
           tts: false,
-          nonce: msg.id,
+          nonce: message.id,
           embed
         }
       }, r => {
@@ -501,7 +371,7 @@ class Citador {
           type: this.MainDiscord.ActionTypes.MESSAGE_SEND_FAILED,
           messageId: msg.id,
           channelId: cc.id
-        }))
+        }));
       });
           
       ReactUtilities.getOwnerInstance($('form')[0]).setState({textValue: ''});
@@ -519,18 +389,16 @@ class Citador {
       if (e.shiftKey || $('.autocomplete-1TnWNR').length >= 1) return;
     
       var messages  = props.messages.filter(m => !m.deleted),
-        guilds    = this.guilds,
-        msg      = props.messages[0],
-        cc        = ReactUtilities.getOwnerInstance($("form")[0]).props.channel,
-        msgC      = props.channel,
-        msgG      = guilds.filter(g => g.id == msgC.guild_id)[0],
-        
-        author    = msg.author,
-        color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
-        content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
-        text      = messages.map(m => m.content).join('\n'),
-        atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
-        chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
+          guilds    = this.guilds,
+          msg      = props.messages[0],
+          cc        = ReactUtilities.getOwnerInstance($("form")[0]).props.channel,
+          msgC      = props.channel,
+          msgG      = guilds.filter(g => g.id == msgC.guild_id)[0],
+          author    = msg.author,
+          content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
+          text      = messages.map(m => m.content).join('\n'),
+          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
+          chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
           
       if (this.selectionP) {
         var start = this.selectionP.start,
@@ -614,6 +482,7 @@ class Citador {
     if (!guild || target.className !== "avatar-small") return;
     
     let {id} = guild;
+    if (this.forcedGuilds.includes(id)) return;
     $(context).find('.item-1XYaYf').first().after(
       $(new PluginContextMenu.ToggleItem(this.local.settings.disableServers.context, !this.settings.disabledServers.includes(id), {
         callback: e => {
@@ -629,6 +498,20 @@ class Citador {
   
   /** UTILS **/
   
+  downloadJSON(url) {
+    return new Promise((resolve, reject) => {
+	  require("request")(url, (err, resp, body) => {
+        if (err) reject(err);
+        try {
+          resolve(JSON.parse(body));
+        }
+        catch (err) {
+          reject(err);
+        }
+      });
+    });
+  };
+  
   canEmbed() {
     const channel = ReactUtilities.getOwnerInstance($(".messages-wrapper")[0]);
     return channel.props.channel.isPrivate() || channel.can(0x4000, {channelId: channel.props.channel.id});
@@ -640,7 +523,7 @@ class Citador {
   }
   
   log(message, method = 'log') {
-    console[method](`[${this.getName()}]`, message)
+    console[method](`[${this.getName()}]`, message);
   }
   
   inject(name, options) {
@@ -675,10 +558,10 @@ class Citador {
   
   get defaultSettings() {
     return {
-      useFallbackCodeblock: 0,
+      useFallbackCodeblock: 1,
       mentionUser: false,
       disabledServers: []
-    }
+    };
   }
   
   getIconTemplate(guild) {
@@ -752,6 +635,7 @@ class Citador {
         .append(
           $('<div class="citador-guilds">').append(
             this.guilds.map(guild => {
+              if (this.forcedGuilds.includes(guild.id)) return;
               let guildEl = this.GuildElement(guild);
               return guildEl
                 .click(() => {
@@ -807,10 +691,10 @@ class Citador {
         })
         .find('.checkbox-1ix_J3')
         .toggleClass('checked-3_4uQ9')
-        .css('border-color', 'rgb(114, 137, 218)')
+        .css('border-color', 'rgb(114, 137, 218)');
       checkbox
         .find('polyline')
-        .attr('stroke', '#7289da')
+        .attr('stroke', '#7289da');
       checkbox
         .find('.title-3BE6m5')
         .toggleClass('titleChecked-2wg0pd')
@@ -819,13 +703,33 @@ class Citador {
     } else {
       return checkbox
         .on('click.citador', () => {
-          this.settings.useFallbackCodeblock = type;
-          this.saveSettings();
-          checkbox.parent().empty().append(
-            this.local.settings.useFallbackCodeblock.choices.map((choice, i) => 
-              this.Checkbox(choice, this.settings.useFallbackCodeblock, i)
-            )
-          );
+          if (type == 0 || type == 2)
+            PluginUtilities.showConfirmationModal(this.local.warning.title, this.local.warning.description, {
+              confirmText: this.local.warning.yes,
+              cancelText: this.local.warning.no,
+              onConfirm: () => {
+                this.settings.useFallbackCodeblock = type;
+                this.saveSettings();
+                checkbox.parent().empty().append(
+                  this.local.settings.useFallbackCodeblock.choices.map((choice, i) => 
+                    this.Checkbox(choice, this.settings.useFallbackCodeblock, i)
+                  )
+                );
+              },
+              onCancel: () => {
+                return;
+              }
+            });
+          else {
+            this.settings.useFallbackCodeblock = type;
+			
+            this.saveSettings();
+            checkbox.parent().empty().append(
+              this.local.settings.useFallbackCodeblock.choices.map((choice, i) => 
+                this.Checkbox(choice, this.settings.useFallbackCodeblock, i)
+              )
+            );
+          }
         });
     }
   }
