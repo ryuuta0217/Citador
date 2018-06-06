@@ -3,6 +3,12 @@
 /* global $, PluginUtilities, PluginTooltip, ReactUtilities, InternalUtilities, PluginContextMenu, PluginSettings, Element */
 
 class Citador {
+
+  constructor() {
+    this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json").then((json) => {
+      this.strings = json;
+    })
+  }
   
   /** LOCALE **/
   
@@ -34,8 +40,6 @@ class Citador {
       rel: 'stylesheet',
       href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css'
     });
-	
-    this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
 
     if (typeof window.ZeresLibrary !== "undefined") 
       this.initialize();
