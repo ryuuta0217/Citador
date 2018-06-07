@@ -79,8 +79,12 @@ class Citador {
         - Discord API
         - Discord Testers
         - Discord HypeSquad
+	- Discord Developers
+	- Discord Events
+	- Discord Feedback
+	- Discord Game Night
     */
-    this.forcedGuilds = ['280806472928198656', '86004744966914048', '81384788765712384', '197038439483310086', '200661830648070145'];
+    this.forcedGuilds = ['280806472928198656', '86004744966914048', '81384788765712384', '197038439483310086', '200661830648070145', '41771983423143937', '169256939211980800', '268811439588900865', '200445132191825920'];
   
     this.loadSettings();
     this.patchExternalLinks();
