@@ -41,6 +41,8 @@ class Citador {
       href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css'
     });
 
+    if(!this.strings) this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
+
     if (typeof window.ZeresLibrary !== "undefined") 
       this.initialize();
     else 
