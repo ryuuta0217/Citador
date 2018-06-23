@@ -79,11 +79,7 @@
   to {transform: scale(1);}
 }
 
-.quote-msg .avatar-large {
-  left: 10px;
-}
-
-.quote-msg .avatar-large:hover:after {
+.quote-msg .avatar-large:not(.da-large):hover:after {
   animation: citador-scale 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation-fill-mode: forwards;
   transform: scale(0.7);

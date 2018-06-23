@@ -23,7 +23,7 @@ class Citador {
   
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.6";              }
+  getVersion      () { return "1.7.7";              }
   getAuthor       () { return "Nirewen";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
@@ -38,10 +38,11 @@ class Citador {
       type: 'text/css',
       id: 'citador-css',
       rel: 'stylesheet',
-      href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css'
+      href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css?v=2'
     });
 
-    if(!this.strings) this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
+    if (!this.strings) 
+      this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
 
     if (typeof window.ZeresLibrary !== "undefined") 
       this.initialize();
@@ -65,7 +66,7 @@ class Citador {
     this.quoteURL          = 'https://github.com/nirewen/Citador?';
     this.CDN_URL           = 'https://cdn.discordapp.com/avatars/';
     this.ASSETS_URL        = 'https://discordapp.com';
-	
+  
     /* 
       Forcing guilds to be blocked in Citador.
       
@@ -81,10 +82,10 @@ class Citador {
         - Discord API
         - Discord Testers
         - Discord HypeSquad
-	- Discord Developers
-	- Discord Events
-	- Discord Feedback
-	- Discord Game Night
+        - Discord Developers
+        - Discord Events
+        - Discord Feedback
+        - Discord Game Night
     */
     this.forcedGuilds = ['280806472928198656', '86004744966914048', '81384788765712384', '197038439483310086', '200661830648070145', '41771983423143937', '169256939211980800', '268811439588900865', '200445132191825920'];
   
@@ -154,7 +155,7 @@ class Citador {
                         new PluginTooltip.Tooltip($(this), self.local.deleteTooltip);
                       });
                       
-                    $('.quote-msg').find('.avatar-large')
+                    $('.quote-msg').find('.avatar-large:not(.da-large)')
                       .click(function () {self.attachMention(self.quoteProps.messages[0].author)});
                     
                     if (self.settings.mentionUser) {
@@ -510,7 +511,7 @@ class Citador {
   
   downloadJSON(url) {
     return new Promise((resolve, reject) => {
-	  require("request")(url, (err, resp, body) => {
+      require("request")(url, (err, resp, body) => {
         if (err) reject(err);
         try {
           resolve(JSON.parse(body));
@@ -523,13 +524,13 @@ class Citador {
   };
   
   canEmbed() {
-    const channel = ReactUtilities.getOwnerInstance($(".messages-wrapper")[0]);
-    return channel.props.channel.isPrivate() || channel.can(0x4000, {channelId: channel.props.channel.id});
+    const channel = ReactUtilities.getOwnerInstance($(".chat")[0]);
+    return channel.state.channel.isPrivate() || channel.can(0x4000, {channelId: channel.state.channel.id});
   }
   
   canChat() {
-    const channel = ReactUtilities.getOwnerInstance($(".messages-wrapper")[0]);
-    return channel.props.channel.isPrivate() || channel.can(0x800, {channelId: channel.props.channel.id});
+    const channel = ReactUtilities.getOwnerInstance($(".chat")[0]);
+    return channel.state.channel.isPrivate() || channel.can(0x800, {channelId: channel.state.channel.id});
   }
   
   log(message, method = 'log') {
@@ -732,7 +733,7 @@ class Citador {
             });
           else {
             this.settings.useFallbackCodeblock = type;
-			
+      
             this.saveSettings();
             checkbox.parent().empty().append(
               this.local.settings.useFallbackCodeblock.choices.map((choice, i) => 
