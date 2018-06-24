@@ -427,9 +427,9 @@ class Citador {
         });
       }
       
-      const format = 'DD-MM-YYYY HH:mm';
+      const format = 'YYYY-MM-DD HH:mm';
       content     += `\n${'```'}\n${this.MessageParser.unparse(text, cc.id).replace(/\n?(```((\w+)?\n)?)+/g, '\n').trim()}\n${'```'}`;
-      content     += `\`${msg.nick || author.username} - ${this.moment(msg.timestamp).format(format)} | ${chName}${atServer}\``;
+      content     += `\`${msg.nick || author.username} - ${this.moment(msg.timestamp).format(format)} | ${atServer}${chName}メッセージを引用しました\``;
       content      = content.trim();
           
       this.MessageController.sendMessage(cc.id, { content });
