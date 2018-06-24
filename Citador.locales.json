@@ -70,10 +70,10 @@
 		"noChatTooltip": "Нет прав для отправки сообщений",
 		"attachment": "Вложение",
 		"warning": {
-			"title": "Embed Warning",
-			"description": "By using embeded quotes you're susceptible to being red flagged from Discord and having embedding permissions removed globally. Use carefully.",
-			"yes": "Use Embeds",
-			"no": "Stick with codeblocks"
+			"title": "Предупреждение о встраивании",
+			"description": "Используя встраиваемые цитаты, вы рискуете быть замеченными командой Дискорда, которые могут глобально запретить вам использовать любые встроенные сообщения. Используйте с осторожностью.",
+			"yes": "Использовать встраивание",
+			"no": "Оставить форматирование"
 		},
 		"settings": {
 			"mentionUser": {
