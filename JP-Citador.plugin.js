@@ -24,7 +24,7 @@ class Citador {
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
   getVersion      () { return "1.7.7";              }
-  getAuthor       () { return "Nirewen";            }
+  getAuthor       () { return "Nirewen | Edit by ryuuta0217";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
   load            () {                              }
@@ -52,7 +52,7 @@ class Citador {
   
   initialize() {
     let self = this;
-    PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/nirewen/Citador/master/Citador.plugin.js");
+    PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/ryuuta0217/Citador/master/JP-Citador.plugin.js");
     PluginUtilities.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`);
     this.switchObserver    = PluginUtilities.createSwitchObserver(this);
     this.MessageParser     = InternalUtilities.WebpackModules.findByUniqueProperties(["createBotMessage"]);

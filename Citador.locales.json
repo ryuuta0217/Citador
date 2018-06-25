@@ -1,4 +1,4 @@
-{
+﻿{
 	"pt": {
 		"description": "Cita alguém no chat",
 		"startMsg": "Iniciado",
@@ -94,7 +94,7 @@
 	},
 	"ja": {
 		"description": "メッセージを引用します",
-		"startMsg": "起動完了",
+		"startMsg": "が起動しました",
 		"quoteTooltip": "引用",
 		"deleteTooltip": "削除",
 		"noPermTooltip": "引用する権限がありません",
