@@ -21,14 +21,23 @@ class Citador {
   
   /** BD FUNCTIONS **/
   
-  getName         () { return "Citador";            }
-  getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.7";              }
-  getAuthor       () { return "Nirewen | Edit by ryuuta0217";            }
+  getName         () { return "Citador"; }
+  getDescription  () { return this.local.description }
+  getVersion      () { return "1.7.8";              }
+  getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything();     }
-  stop            () { this.deleteEverything();     }
-  load            () {                              }
+  stop            () {
+    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.stopMsg}`, {timeout:8000, type:"error"});
+    this.deleteEverything();
+  }
+  load            () {}
   async start     () {
+    let BDFDB = this.inject('script', {
+      type: 'text/javascript',
+      id: 'BDFDB',
+      src: 'https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js'
+    })
+    
     let libraryScript = this.inject('script', {
       type: 'text/javascript',
       id: 'zeresLibraryScript',

@@ -2,6 +2,7 @@
 	"pt": {
 		"description": "Cita alguém no chat",
 		"startMsg": "Iniciado",
+		"stopMsg": "Stopped",
 		"quoteTooltip": "Citar",
 		"deleteTooltip": "Excluir",
 		"noPermTooltip": "Sem permissão para citar",
@@ -33,6 +34,7 @@
 	"de": {
 		"description": "Zitiert jemanden im Chat mithilfe von eingebetten Nachrichten",
 		"startMsg": "Gestartet",
+		"stopMsg": "Stopped",
 		"quoteTooltip": "Zitieren",
 		"deleteTooltip": "Löschen",
 		"noPermTooltip": "Keine Rechte zum Zitieren",
@@ -64,6 +66,7 @@
 	"ru": {
 		"description": "Позволяет цитировать сообщения",
 		"startMsg": "Запущен",
+		"stopMsg": "Stopped",
 		"quoteTooltip": "Цитировать",
 		"deleteTooltip": "Удалить",
 		"noPermTooltip": "Нет прав для цитирования",
@@ -95,6 +98,7 @@
 	"ja": {
 		"description": "メッセージを引用します",
 		"startMsg": "が起動しました",
+		"stopMsg": "が停止しました",
 		"quoteTooltip": "引用",
 		"deleteTooltip": "削除",
 		"noPermTooltip": "引用する権限がありません",
@@ -126,6 +130,7 @@
 	"fr": {
 		"description": "Cite un message du chat",
 		"startMsg": "Lancé",
+		"stopMsg": "Stopped",
 		"quoteTooltip": "Citer",
 		"deleteTooltip": "Supprimer",
 		"noPermTooltip": "Vous n'avez pas la permission de citer",
@@ -157,6 +162,7 @@
 	"en": {
 		"description": "Quotes somebody in chat",
 		"startMsg": "Started",
+		"stopMsg": "Stopped",
 		"quoteTooltip": "Quote",
 		"deleteTooltip": "Delete",
 		"noPermTooltip": "No permission to quote",
