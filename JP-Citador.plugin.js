@@ -27,7 +27,7 @@ class Citador {
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything();     }
   stop            () {
-    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.stopMsg}`, {timeout:8000, type:"error"});
+    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.stopMsg}`, {timeout:6500, type:"error"});
     this.deleteEverything();
   }
   load            () {}
@@ -62,7 +62,7 @@ class Citador {
   initialize() {
     let self = this;
     PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/ryuuta0217/Citador/master/JP-Citador.plugin.js");
-    PluginUtilities.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`);
+    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`, {timeout:6500, type:"success"});
     this.switchObserver    = PluginUtilities.createSwitchObserver(this);
     this.MessageParser     = InternalUtilities.WebpackModules.findByUniqueProperties(["createBotMessage"]);
     this.MessageQueue      = InternalUtilities.WebpackModules.findByUniqueProperties(["enqueue"]);
@@ -72,7 +72,7 @@ class Citador {
     this.HistoryUtils      = InternalUtilities.WebpackModules.findByUniqueProperties(['transitionTo', 'replaceWith', 'getHistory']);
     this.moment            = InternalUtilities.WebpackModules.findByUniqueProperties(['parseZone']);
     this.initialized       = true;
-    this.quoteURL          = 'https://github.com/nirewen/Citador?';
+    this.quoteURL          = 'https://github.com/ryuuta0217/Citador?';
     this.CDN_URL           = 'https://cdn.discordapp.com/avatars/';
     this.ASSETS_URL        = 'https://discordapp.com';
   
