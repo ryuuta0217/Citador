@@ -1,4 +1,4 @@
-//META{"name":"Citador"}*//
+//META{"name":"Citador","source":"https://github.com/ryuuta0217/Citador"}*//
 
 /* global $, PluginUtilities, PluginTooltip, ReactUtilities, InternalUtilities, PluginContextMenu, PluginSettings, Element */
 
