@@ -1,8 +1,8 @@
-//META{"name":"Citador","source":"https://github.com/ryuuta0217/Citador"}*//
+//META{"name":"QuoteMessage","source":"https://github.com/ryuuta0217/Citador"}*//
 
 /* global $, PluginUtilities, PluginTooltip, ReactUtilities, InternalUtilities, PluginContextMenu, PluginSettings, Element */
 
-class Citador {
+class QuoteMessage {
 
   constructor() {
     this.downloadJSON("https://cdn.p1kt.net/Citador.locales.json").then((json) => {
@@ -11,7 +11,7 @@ class Citador {
   }
   
   /** LOCALE **/
-  
+
   get local() {
     if (this.strings)
       return this.strings[document.documentElement.getAttribute('lang').split('-')[0]] || this.strings.en;
@@ -21,7 +21,7 @@ class Citador {
   
   /** BD FUNCTIONS **/
   
-  getName         () { return "Citador"; }
+  getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
   getVersion      () { return "1.7.8";              }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
@@ -50,7 +50,7 @@ class Citador {
       href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css?v=2'
     });
 
-    if (!this.strings) 
+    if (!this.strings)
       this.strings = await this.downloadJSON("https://cdn.p1kt.net/Citador.locales.json");
 
     if (typeof window.ZeresLibrary !== "undefined") 
