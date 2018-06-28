@@ -9,7 +9,7 @@
 
 ### プラグインのインストール(Windows)
 
-1. [ここ]() から最新バージョンのプラグインをダウンロード
+1. [ここ](https://github.com/ryuuta0217/Citador/releases) から最新バージョンのプラグイン(QuoteMessage.plugin.js)をダウンロード
 2. <kbd>Win</kbd> と <kbd>R</kbd> (またはスタートメニューから"ファイル名を指定して実行") を同時押しして
 3. `%appdata%/BetterDiscord/plugins` と入力して `Enter` を押します
 4. ダウンロードしたQuoteMessage.plugin.jsを開いたフォルダーにコピーすれば、インストールは完了します。
