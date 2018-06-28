@@ -1,40 +1,17 @@
-# Citador
-A plugin to facilitate quoting for a better conversation, without people being lost in the context :wink:
+##インストール方法
 
-## Features
-- Allows you to see the message that will be quoted
-- Allows you to delete a message you don't want to quote
-- Allows you to select the message you want to quote
-- Allows you to switch servers or channels while quoting
+### BetterDiscord のインストール
 
-### BetterDiscord installation
+1. [https://github.com/rauenzi/BetterDiscordApp/releases](https://github.com/rauenzi/BetterDiscordApp/releases) から
+2. 使用しているOSに合った最新バージョンのBetterDiscordをダウンロードする
+3. (Macの場合) ダウンロードした .zip ファイルを解答してインストールする
+3. (Windowsの場合) ダウンロードした .exe ファイルをダブルクリックしてインストールする
 
-1. Go to the [BetterDiscord site](https://github.com/rauenzi/BetterDiscordApp/releases/tag/0.2.82)
-2. Download the version for your operating system
-3. Extract the files from the .zip
-4. Install by clicking on the .exe file
+### プラグインのインストール(Windows)
 
-### Plugin installation
+1. [ここ]() から最新バージョンのプラグインをダウンロード
+2. <kbd>Win</kbd> と <kbd>R</kbd> (またはスタートメニューから"ファイル名を指定して実行") を同時押しして
+3. `%appdata%/BetterDiscord/plugins` と入力して `Enter` を押します
+4. ダウンロードしたQuoteMessage.plugin.jsを開いたフォルダーにコピーすれば、インストールは完了します。
 
-In order to install, follow the steps of a regular plugin installation:
-
-1. Download the latest version in [releases](https://github.com/nirewen/Citador/releases).
-2. Type <kbd>Win</kbd> + <kbd>R</kbd> (or open 'Run' in start menu)
-3. Type `%appdata%/BetterDiscord/plugins` and hit `Enter`
-4. Place the downloaded file there.
-
-Any question, ask me on Discord: Nirewen`#9011`
-
-You can also join [the support server](https://discord.gg/tQrdqKG) [EN]
-
-
-Translated by L11K`#5987`
-
-### Known bugs
-- [ ] Global emotes / Guild emotes might not show
-- For this one I won't fix, once Nitros don't have this issue
-- Just don't be surprised if the emote doesn't work, it's not plugin's fault, but Discord's API
-  that prohibited global emotes in embeds (what quotes basically are)
-
-### Preview
-![Citador em ação](http://nirewen.s-ul.eu/02Tcv6ZT.gif)
+Discord側で認識されない場合は、 Ctrl+R を押して再読み込みするなどをお試し下さい。
