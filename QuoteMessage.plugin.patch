@@ -1,0 +1,123 @@
+diff --git a/QuoteMessage.plugin.js b/QuoteMessage.plugin.js
+index c389dbd..606cb59 100644
+--- a/QuoteMessage.plugin.js
++++ b/QuoteMessage.plugin.js
+@@ -1,11 +1,11 @@
+-//META{"name":"Citador"}*//
++//META{"name":"QuoteMessage"}*//
+ 
+ /* global $, PluginUtilities, PluginTooltip, ReactUtilities, InternalUtilities, PluginContextMenu, PluginSettings, Element */
+ 
+-class Citador {
++class QuoteMessage {
+ 
+   constructor() {
+-    this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json").then((json) => {
++    this.downloadJSON("https://cdn.p1kt.net/Citador.locales.json").then((json) => {
+       this.strings = json;
+     })
+   }
+@@ -21,14 +21,22 @@ class Citador {
+   
+   /** BD FUNCTIONS **/
+   
+-  getName         () { return "Citador";            }
+-  getDescription  () { return this.local.description}
+-  getVersion      () { return "1.7.8-fix";              }
+-  getAuthor       () { return "Nirewen";            }
+-  unload          () { this.deleteEverything();     }
+-  stop            () { this.deleteEverything();     }
+-  load            () {                              }
++  getName         () { return "メッセージ引用"; }
++  getDescription  () { return this.local.description }
++  getVersion      () { return "1.7.8-fix"; }
++  getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
++  unload          () { this.deleteEverything(); }
++  stop            () {
++    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.stopMsg}`, {timeout:6500, type:"error"});
++    this.deleteEverything();
++  }
++  load            () {}
+   async start     () {
++    let BDFDB = this.inject('script', {
++      type: 'text/javascript',
++      id: 'BDFDB',
++      src: 'https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js'
++    })
+     let libraryScript = this.inject('script', {
+       type: 'text/javascript',
+       id: 'zeresLibraryScript',
+@@ -41,8 +49,8 @@ class Citador {
+       href: 'https://rawgit.com/nirewen/Citador/master/Citador.styles.css?v=2'
+     });
+ 
+-    if (!this.strings) 
+-      this.strings = await this.downloadJSON("https://rawgit.com/nirewen/Citador/master/Citador.locales.json");
++    if (!this.strings)
++    this.strings = await this.downloadJSON("https://cdn.p1kt.net/Citador.locales.json");
+ 
+     if (typeof window.ZeresLibrary !== "undefined") 
+       this.initialize();
+@@ -52,8 +60,8 @@ class Citador {
+   
+   initialize() {
+     let self = this;
+-    PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/nirewen/Citador/master/Citador.plugin.js");
+-    PluginUtilities.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`);
++    PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/ryuuta0217/Citador/master/QuoteMessage.plugin.js");
++    BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`, {timeout:6500, type:"success"});
+     this.switchObserver    = PluginUtilities.createSwitchObserver(this);
+     this.MessageParser     = InternalUtilities.WebpackModules.findByUniqueProperties(["createBotMessage"]);
+     this.MessageQueue      = InternalUtilities.WebpackModules.findByUniqueProperties(["enqueue"]);
+@@ -63,7 +71,7 @@ class Citador {
+     this.HistoryUtils      = InternalUtilities.WebpackModules.findByUniqueProperties(['transitionTo', 'replaceWith', 'getHistory']);
+     this.moment            = InternalUtilities.WebpackModules.findByUniqueProperties(['parseZone']);
+     this.initialized       = true;
+-    this.quoteURL          = 'https://github.com/nirewen/Citador?';
++    this.quoteURL          = 'https://github.com/ryuuta0217/Citador?';
+     this.CDN_URL           = 'https://cdn.discordapp.com/avatars/';
+     this.ASSETS_URL        = 'https://discordapp.com';
+   
+@@ -286,8 +294,8 @@ class Citador {
+           color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
+           msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()),
+           text      = messages.map(m => m.content).join('\n'),
+-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
+-          chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
++          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の ` : '',
++          chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
+           
+       if (this.selectionP) {
+         var start = this.selectionP.start,
+@@ -313,7 +321,7 @@ class Citador {
+           },
+           description: text,
+           footer: {
+-            text: `in ${chName}${atServer}`
++            text: `${atServer} ${chName}メッセージを引用しました`
+           },
+           color,
+           timestamp: msg.timestamp.toISOString(),
+@@ -383,8 +391,8 @@ class Citador {
+           author    = msg.author,
+           content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
+           text      = messages.map(m => m.content).join('\n'),
+-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? ` at ${msgG.name}` : '',
+-          chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name}`;
++          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の` : '',
++          chName    = msgC.isDM() ? `${msgC._getUsers()[0].username} とのダイレクト` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
+           
+       if (this.selectionP) {
+         var start = this.selectionP.start,
+@@ -402,9 +410,9 @@ class Citador {
+         });
+       }
+       
+-      const format = 'DD-MM-YYYY HH:mm';
++      const format = 'YYYY-MM-DD HH:mm';
+       content     += `\n${'```'}\n${this.MessageParser.unparse(text, cc.id).replace(/\n?(```((\w+)?\n)?)+/g, '\n').trim()}\n${'```'}`;
+-      content     += `\`${msg.nick || author.username} - ${this.moment(msg.timestamp).format(format)} | ${chName}${atServer}\``;
++      content     += `\`${msg.nick || author.username} - ${this.moment(msg.timestamp).format(format)} | ${atServer}${chName}メッセージを引用しました\``;
+       content      = content.trim();
+           
+       this.MessageController.sendMessage(cc.id, { content });
