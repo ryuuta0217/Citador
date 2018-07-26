@@ -23,7 +23,7 @@ class Citador {
   
   getName         () { return "Citador";            }
   getDescription  () { return this.local.description}
-  getVersion      () { return "1.7.8";              }
+  getVersion      () { return "1.7.8-fix";              }
   getAuthor       () { return "Nirewen";            }
   unload          () { this.deleteEverything();     }
   stop            () { this.deleteEverything();     }
@@ -95,35 +95,19 @@ class Citador {
     $(document).on("mouseover.citador", function(e) {
       let target = $(e.target),
         classes = {
-          canary: {
-            close_button: 'prepend',
-            group: 'container-1YxwTf',
-            message: 'message-1PNnaP',
-            markup: 'markup-2BOw-j',
-            avatar: 'avatar-17mtNa .image-33JSyf',
-            username: 'username-_4ZSMR',
-            compact: 'containerCompact-3V0ioj',
-            accessory: 'container-1e22Ot',
-            embed: 'embed-IeVjo6',
-            time: 'time:not(.edited-DL9ECl)',
-            edited: 'edited-DL9ECl',
-            option: 'buttonContainer-37UsAw .button-3Jq0g9'
-          },
-          stable: {
-            close_button: 'append',
-            group: 'message-group',
-            message: 'message',
-            markup: 'markup',
-            avatar: 'avatar-large:not(.da-large)',
-            username: 'user-name',
-            compact: 'compact',
-            accessory: 'accessory',
-            embed: 'embed-IeVjo6',
-            time: '.timestamp',
-            edited: 'edited',
-            option: 'btn-option'
-          }
-        }[DiscordNative.globals.releaseChannel];
+          close_button: 'prepend',
+          group: 'container-1YxwTf',
+          message: 'message-1PNnaP',
+          markup: 'markup-2BOw-j',
+          avatar: 'avatar-17mtNa .image-33JSyf',
+          username: 'username-_4ZSMR',
+          compact: 'containerCompact-3V0ioj',
+          accessory: 'container-1e22Ot',
+          embed: 'embed-IeVjo6',
+          time: 'time:not(.edited-DL9ECl)',
+          edited: 'edited-DL9ECl',
+          option: 'buttonContainer-37UsAw .button-3Jq0g9'
+        };
       
       if (target.parents(`.${classes.message}`).length > 0) {
         $(`.messages .${classes.group}`)
