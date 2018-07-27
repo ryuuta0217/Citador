@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.8-fix"; }
+  getVersion      () { return "1.7.14"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
