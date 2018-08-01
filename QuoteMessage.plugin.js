@@ -43,14 +43,11 @@ class QuoteMessage {
 			libraryScript.setAttribute("src", "https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js");
 			document.head.appendChild(libraryScript);
 		}
-
-    libraryScript = document.querySelector('head script[src="https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js"]');
-		if (libraryScript) libraryScript.remove();
-		libraryScript = document.createElement("script");
-		libraryScript.setAttribute("type", "text/javascript");
-		libraryScript.setAttribute("src", "https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js");
-    document.head.appendChild(libraryScript);
-    
+    let libraryScript = this.inject('script', {
+      type: 'text/javascript',
+      id: 'zeresLibraryScript',
+      src: 'https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js'
+    });
     this.inject('link', {
       type: 'text/css',
       id: 'citador-css',
