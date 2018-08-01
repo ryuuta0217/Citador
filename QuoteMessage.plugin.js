@@ -23,25 +23,34 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.15"; }
+  getVersion      () { return "1.7.16"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
     BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.stopMsg}`, {timeout:6500, type:"error"});
     this.deleteEverything();
   }
-  load            () {}
+  load            () {
+    console.info(`%c[メッセージ引用/start] プラグインが読み込まれました`, 'color: aqua;');
+  }
   async start     () {
-    let BDFDB = this.inject('script', {
-      type: 'text/javascript',
-      id: 'BDFDB',
-      src: 'https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js'
-    })
-    let libraryScript = this.inject('script', {
-      type: 'text/javascript',
-      id: 'zeresLibraryScript',
-      src: 'https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js'
-    });
+    console.info(`%c[メッセージ引用/start] 読み込み中`, 'color: aqua;');
+		if (typeof BDFDB !== "object" || typeof BDFDB.isLibraryOutdated !== "function" || BDFDB.isLibraryOutdated()) {
+			libraryScript = document.querySelector('head script[src="https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js"]');
+			if (libraryScript) libraryScript.remove();
+			libraryScript = document.createElement("script");
+			libraryScript.setAttribute("type", "text/javascript");
+			libraryScript.setAttribute("src", "https://mwittrien.github.io/BetterDiscordAddons/Plugins/BDFDB.js");
+			document.head.appendChild(libraryScript);
+		}
+
+    libraryScript = document.querySelector('head script[src="https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js"]');
+		if (libraryScript) libraryScript.remove();
+		libraryScript = document.createElement("script");
+		libraryScript.setAttribute("type", "text/javascript");
+		libraryScript.setAttribute("src", "https://rauenzi.github.io/BetterDiscordAddons/Plugins/PluginLibrary.js");
+    document.head.appendChild(libraryScript);
+    
     this.inject('link', {
       type: 'text/css',
       id: 'citador-css',
@@ -59,6 +68,7 @@ class QuoteMessage {
   }
   
   initialize() {
+    console.info(`%c[メッセージ引用/start] initializeが呼び出されました`, 'color: aqua;');
     let self = this;
     PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/ryuuta0217/Citador/master/QuoteMessage.plugin.js");
     BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`, {timeout:6500, type:"success"});
@@ -216,6 +226,7 @@ class QuoteMessage {
   }
   
   onChannelSwitch () {
+    console.info(`%c[メッセージ引用/引用] onChannelSwitchが呼び出されました`, 'color: aqua;');
     if (this.quoteProps) {
       this.attachParser();
       
@@ -234,12 +245,14 @@ class QuoteMessage {
   }
   
   getSettingsPanel() {
+    console.info(`%c[メッセージ引用/引用] getSettingsPanelが呼び出されました`, 'color: aqua;');
     let panel = $("<form>").addClass("form citador").css("width", "100%");
     if (this.initialized) this.generateSettings(panel);
     return panel[0];
   }
   
   attachParser() {
+    console.info(`%c[メッセージ引用/引用] attachParserが呼び出されました`, 'color: aqua;');
     var el = $('.channelTextArea-1LDbYG');
     if (el.length == 0) return;
     
@@ -278,6 +291,7 @@ class QuoteMessage {
   }
   
   sendEmbedQuote(e) {
+    console.info(`%c[メッセージ引用/引用] sendEmbedQuoteが呼び出されました`, 'color: aqua;');
     var props = this.quoteProps;
     if (props) {
       if (e.shiftKey || $('.autocomplete-1vrmpx').length >= 1) return;
@@ -378,6 +392,7 @@ class QuoteMessage {
   }
   
   sendTextQuote(e) {
+    console.info(`%c[メッセージ引用/引用] sendTextQuoteが呼び出されました`, 'color: aqua;');
     var props = this.quoteProps;
     if (props) {
       if (e.shiftKey || $('.autocomplete-1TnWNR').length >= 1) return;
@@ -427,6 +442,7 @@ class QuoteMessage {
   }
   
   patchExternalLinks() {
+    console.info(`%c[メッセージ引用/引用] patchExternalLinksが呼び出されました`, 'color: aqua;');
     let LinkComponent = InternalUtilities.WebpackModules.find(InternalUtilities.Filters.byCode(/trusted/));
     this.cancel = InternalUtilities.monkeyPatch(LinkComponent.prototype, "render", {before: ({thisObject}) => {
         if (thisObject.props.href.startsWith(this.quoteURL)) {
@@ -455,8 +471,8 @@ class QuoteMessage {
       if (this.quoteProps.messages.filter(m => !m.deleted).length < 2)
         this.cancelQuote();
       else {
-        let deleteMsg = $($(`.quote-msg .${classes.message}`)[i]);                
-        deleteMsg.find(`.${classes.message_text}, .${classes.accessory}`).hide();
+        let deleteMsg = $($(`.quote-msg .message-1PNnaP`)[i]);                
+        deleteMsg.find(`.content-3dzVd8, .container-1e22Ot`).hide();
         this.quoteProps.messages[i].deleted = true;
       }
     } else
@@ -464,6 +480,7 @@ class QuoteMessage {
   }
   
   cancelQuote() {
+    console.info(`%c[メッセージ引用/引用] cancelQuoteが呼び出されました`, 'color: aqua;');
     $('.quote-msg').slideUp(300, () => $('.quote-msg').remove());
     this.quoteMsg   = null;
     this.quoteProps.messages.forEach(m => m.deleted = null);
