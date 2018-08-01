@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.14"; }
+  getVersion      () { return "1.7.15"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
@@ -446,16 +446,9 @@ class QuoteMessage {
   
   removeQuoteAtIndex(i) {
     let classes = {
-      canary: {
-        message: 'message-1PNnaP',
-        message_text: 'content-3dzVd8',
-        accessory: 'container-1e22Ot'
-      },
-      stable: {
-        message: 'message',
-        message_text: 'message-text',
-        accessory: 'accessory'
-      }
+      message: 'message-1PNnaP',
+      message_text: 'content-3dzVd8',
+      accessory: 'container-1e22Ot'
     }[DiscordNative.globals.releaseChannel];
     
     if (this.quoteProps) {
