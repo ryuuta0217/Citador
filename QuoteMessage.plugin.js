@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.20"; }
+  getVersion      () { return "1.7.21"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
@@ -133,8 +133,8 @@ class QuoteMessage {
                     
                     $('.quote-msg').find('.citar-btn').toggleClass('hidden');
                     
-                    $('.quote-msg').find(`.${classes.embed}`).each(function() {
-                      $(this).closest(`.${classes.accessory}`).remove();
+                    $('.quote-msg').find(`.embed-IeVjo6`).each(function() {
+                      $(this).closest(`.container-1e22Ot`).remove();
                     });
                     
                     $('.quote-msg').find(`.markup-2BOw-j`).each(function() {
