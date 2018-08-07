@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.22"; }
+  getVersion      () { return "1.7.23"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
@@ -66,7 +66,6 @@ class QuoteMessage {
     let self = this;
     PluginUtilities.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/ryuuta0217/Citador/master/QuoteMessage.plugin.js");
     BDFDB.showToast(`${this.getName()} ${this.getVersion()} ${this.local.startMsg.toLowerCase()}`, {timeout:6500, type:"success"});
-    this.switchObserver    = PluginUtilities.createSwitchObserver(this);
     this.MessageParser     = InternalUtilities.WebpackModules.findByUniqueProperties(["createBotMessage"]);
     this.MessageQueue      = InternalUtilities.WebpackModules.findByUniqueProperties(["enqueue"]);
     this.MessageController = InternalUtilities.WebpackModules.findByUniqueProperties(["sendClydeError"]);
@@ -207,7 +206,7 @@ class QuoteMessage {
     this.log(this.local.startMsg, "info");
   }
   
-  onChannelSwitch () {
+  onSwitch () {
     console.info(`%c[メッセージ引用/引用] onChannelSwitchが呼び出されました`, 'color: aqua;');
     if (this.quoteProps) {
       this.attachParser();
@@ -542,7 +541,6 @@ class QuoteMessage {
     $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).off('mouseover');
     $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).off('mouseleave');
     this.remove("citador-css");
-    this.switchObserver.disconnect();
     this.initialized = false;
     this.cancel();
   }
