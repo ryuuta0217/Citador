@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.23"; }
+  getVersion      () { return "1.7.24"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
@@ -207,7 +207,7 @@ class QuoteMessage {
   }
   
   onSwitch () {
-    console.info(`%c[メッセージ引用/引用] onChannelSwitchが呼び出されました`, 'color: aqua;');
+    console.info(`%c[メッセージ引用/引用] onChannelSwitch[onSwitch]が呼び出されました`, 'color: aqua;');
     if (this.quoteProps) {
       this.attachParser();
       
@@ -424,7 +424,7 @@ class QuoteMessage {
   
   patchExternalLinks() {
     console.info(`%c[メッセージ引用/引用] patchExternalLinksが呼び出されました`, 'color: aqua;');
-    let LinkComponent = InternalUtilities.WebpackModules.find(InternalUtilities.Filters.byCode(/trusted/));
+    let LinkComponent = InternalUtilities.WebpackModules.find(m => m && m.toString && m.toString([]).includes("trusted"));
     this.cancel = InternalUtilities.monkeyPatch(LinkComponent.prototype, "render", {before: ({thisObject}) => {
         if (thisObject.props.href.startsWith(this.quoteURL)) {
           thisObject.props.trusted = true;
