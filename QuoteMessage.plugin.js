@@ -23,7 +23,7 @@ class QuoteMessage {
   
   getName         () { return "メッセージ引用"; }
   getDescription  () { return this.local.description }
-  getVersion      () { return "1.7.24"; }
+  getVersion      () { return "1.7.25"; }
   getAuthor       () { return "Nirewen | Edit by ryuuta0217"; }
   unload          () { this.deleteEverything(); }
   stop            () {
@@ -108,11 +108,11 @@ class QuoteMessage {
     
     $(document).on("mouseover.citador", function(e) {
       let target = $(e.target);
-      if (target.parents(`.${DiscordClassModules.Messages.message}`).length > 0) {
-        $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`)
+      if (target.parents(`${DiscordSelectors.Messages.message}`).length > 0) {
+        $(`${DiscordSelectors.Messages.messages} ${DiscordSelectors.Messages.container}`)
           .on('mouseover', function() {
             if ($(this).find('.citar-btn').length == 0) {
-              $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).hasClass(DiscordClassModules.Messages.containerCompact) 
+              $(`${DiscordSelectors.Messages.messages} ${DiscordSelectors.Messages.container}`).hasClass(DiscordClassModules.Messages.containerCompact) 
                 ? $(this).find('time:not(.edited-DL9ECl)').first().prepend('<span class="citar-btn"></span>') 
                 : $(this).find('time:not(.edited-DL9ECl)').append('<span class="citar-btn"></span>');
                 
@@ -122,7 +122,7 @@ class QuoteMessage {
                 .click(function() {
                   self.attachParser();
                   
-                  let message = $(this).parents(`.${DiscordClassModules.Messages.container}`);
+                  let message = $(this).parents(`${DiscordSelectors.Messages.container}`);
                   
                   self.quoteProps = $.extend(true, {}, ReactUtilities.getOwnerInstance(message[0]).props);
                   
@@ -137,8 +137,8 @@ class QuoteMessage {
                     });
                     
                     $('.quote-msg').find(`.markup-2BOw-j`).each(function() {
-                      let index = $(`.quote-msg .${DiscordClassModules.Messages.message}`).index($(`.quote-msg .${DiscordClassModules.Messages.message}`).has(this));
-                      if (0 === self.quoteProps.messages[index].content.length + $(this).closest(`.${DiscordClassModules.Messages.message}`).find(`.container-1e22Ot`).length) {
+                      let index = $(`.quote-msg ${DiscordSelectors.Messages.message}`).index($(`.quote-msg ${DiscordSelectors.Messages.message}`).has(this));
+                      if (0 === self.quoteProps.messages[index].content.length + $(this).closest(`${DiscordSelectors.Messages.message}`).find(`.container-1e22Ot`).length) {
                         self.removeQuoteAtIndex(index);
                       }
                     });
@@ -146,28 +146,28 @@ class QuoteMessage {
                     $('.quote-msg').find(`.markup-2BOw-j`).before('<div class="delete-msg-btn"></div>');
                     $('.quote-msg').find(`.edited-DL9ECl, .buttonContainer-37UsAw .button-3Jq0g9, .btn-reaction`).remove();
                     
-                    $(`.quote-msg .${DiscordClassModules.Messages.container}`).prepend('<div class="quote-close"></div>');
+                    $(`.quote-msg ${DiscordSelectors.Messages.container}`).prepend('<div class="quote-close"></div>');
                     $('.quote-msg').find('.quote-close').click(() => self.cancelQuote());
                     
                     // define a função de clique, pra deletar uma mensagem que você não deseja citar
                     $('.quote-msg').find('.delete-msg-btn')
                       .click(function() {
-                        self.removeQuoteAtIndex($(`.quote-msg .${DiscordClassModules.Messages.message}`).index($(`.quote-msg .${DiscordClassModules.Messages.message}`).has(this)));
+                        self.removeQuoteAtIndex($(`.quote-msg ${DiscordSelectors.Messages.message}`).index($(`.quote-msg ${DiscordSelectors.Messages.message}`).has(this)));
                       })
                       .each(function() {
                         new PluginTooltip.Tooltip($(this), self.local.deleteTooltip);
                       });
                       
-                    ($(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).hasClass(DiscordClassModules.Messages.containerCompact) 
-                      ? $('.quote-msg').find(`.${DiscordClassModules.Messages.username}`)
-                      : $('.quote-msg').find(`.${DiscordClassModules.Messages.avatar}`))
+                    ($(`${DiscordSelectors.Messages.messages} ${DiscordSelectors.Messages.container}`).hasClass(DiscordClassModules.Messages.containerCompact) 
+                      ? $('.quote-msg').find(`${DiscordSelectors.Messages.username}`)
+                      : $('.quote-msg').find(`${DiscordSelectors.Messages.avatar}`))
                       .click(function () {self.attachMention(self.quoteProps.messages[0].author)});
                     
                     if (self.settings.mentionUser) {
                       self.attachMention(self.quoteProps.messages[0].author);
                     }
 
-                    $('.quote-msg').find(`.${DiscordClassModules.Messages.message}`)
+                    $('.quote-msg').find(`${DiscordSelectors.Messages.message}`)
                       .on('mouseover.citador', function() {
                         $(this).find('.delete-msg-btn').fadeTo(5, 0.4);
                       })
@@ -187,8 +187,8 @@ class QuoteMessage {
                     messageElem.slideDown(150);
                   };
                   
-                  if ($(`.quote-msg .${DiscordClassModules.Messages.container}`).length > 0)
-                    $(`.quote-msg .${DiscordClassModules.Messages.container}`).remove();
+                  if ($(`.quote-msg ${DiscordSelectors.Messages.container}`).length > 0)
+                    $(`.quote-msg ${DiscordSelectors.Messages.container}`).remove();
                   else
                     $('.channelTextArea-1LDbYG').prepend('<div class="quote-msg"></div>');
                   
@@ -289,7 +289,7 @@ class QuoteMessage {
           color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
           msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()),
           text      = messages.map(m => m.content).join('\n'),
-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の ` : '',
+          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `${msgG.name} の ` : '',
           chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
           
       if (this.selectionP) {
@@ -387,7 +387,7 @@ class QuoteMessage {
           author    = msg.author,
           content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
           text      = messages.map(m => m.content).join('\n'),
-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の` : '',
+          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `${msgG.name} の` : '',
           chName    = msgC.isDM() ? `${msgC._getUsers()[0].username} とのダイレクト` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
           
       if (this.selectionP) {
@@ -446,8 +446,8 @@ class QuoteMessage {
       if (this.quoteProps.messages.filter(m => !m.deleted).length < 2)
         this.cancelQuote();
       else {
-        let deleteMsg = $($(`.quote-msg .${DiscordClassModules.Messages.message}`)[i]);                
-        deleteMsg.find(`.${DiscordClassModules.Messages.content}, .container-1e22Ot`).hide();
+        let deleteMsg = $($(`.quote-msg ${DiscordSelectors.Messages.message}`)[i]);                
+        deleteMsg.find(`${DiscordSelectors.Messages.content}, .container-1e22Ot`).hide();
         this.quoteProps.messages[i].deleted = true;
       }
     } else
@@ -538,15 +538,15 @@ class QuoteMessage {
   
   deleteEverything() {
     $(document).off("mouseover.citador");
-    $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).off('mouseover');
-    $(`.${DiscordClassModules.Messages.messages} .${DiscordClassModules.Messages.container}`).off('mouseleave');
+    $(`${DiscordSelectors.Messages.messages} ${DiscordSelectors.Messages.container}`).off('mouseover');
+    $(`${DiscordSelectors.Messages.messages} ${DiscordSelectors.Messages.container}`).off('mouseleave');
     this.remove("citador-css");
     this.initialized = false;
     this.cancel();
   }
   
   get guilds () { 
-    return ReactUtilities.getOwnerInstance($(`.${DiscordClassModules.Guilds.guildsWrapper}`)[0]).props.guilds.map(o => o.guild);
+    return ReactUtilities.getOwnerInstance($(`${DiscordSelectors.Guilds.guildsWrapper}`)[0]).props.guilds.map(o => o.guild);
   }
   
   get defaultSettings() {
