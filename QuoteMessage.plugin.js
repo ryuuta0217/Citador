@@ -303,7 +303,7 @@ var QuoteMessage = (() => {
           msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()),
           text      = messages.map(m => m.content).join('\n'),
           atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の ` : '',
-          chName    = msgC.isDM() ? `@${msgC._getUsers()[0].username}` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
+          chName    = msgC.isDM() ? `${msgC._getUsers()[0].username} とのダイレクト` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
           
       if (this.selectionP) {
         var start = this.selectionP.start,
