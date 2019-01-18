@@ -26,7 +26,7 @@ var QuoteMessage = (() => {
   /** BD FUNCTIONS **/
   
   getName() {
-    return "QuoteMessage";
+    return "メッセージ引用";
   }
 
   getDescription() {
