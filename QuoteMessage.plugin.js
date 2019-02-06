@@ -34,7 +34,7 @@ var QuoteMessage = (() => {
   }
 
   getVersion() {
-    return "1.7.26";
+    return "1.7.27";
   }
 
   getAuthor() {
@@ -302,7 +302,7 @@ var QuoteMessage = (() => {
           color     = parseInt(msg.colorString ? msg.colorString.slice(1) : 'ffffff', 16),
           msgCnt    = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()),
           text      = messages.map(m => m.content).join('\n'),
-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の ` : '',
+          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `${msgG.name} の ` : '',
           chName    = msgC.isDM() ? `${msgC._getUsers()[0].username} とのダイレクト` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
           
       if (this.selectionP) {
@@ -399,7 +399,7 @@ var QuoteMessage = (() => {
           author    = msg.author,
           content   = this.MessageParser.parse(cc, $('.channelTextArea-1LDbYG textarea').val()).content,
           text      = messages.map(m => m.content).join('\n'),
-          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `サーバー ${msgG.name} の` : '',
+          atServer  = msgC.guild_id && msgC.guild_id != cc.guild_id ? `${msgG.name} の` : '',
           chName    = msgC.isDM() ? `${msgC._getUsers()[0].username} とのダイレクト` : msgC.isGroupDM() ? `${msgC.name}` : `#${msgC.name} から`;
           
       if (this.selectionP) {
