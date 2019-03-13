@@ -34,7 +34,7 @@ var QuoteMessage = (() => {
   }
 
   getVersion() {
-    return "1.7.27";
+    return "1.7.28";
   }
 
   getAuthor() {
@@ -556,7 +556,7 @@ var QuoteMessage = (() => {
   }
   
   get guilds () {
-    return ReactTools.getOwnerInstance($(`${DiscordSelectors.Guilds.guildsWrapper}`)[0]).props.guilds.map(o => o.guild);
+    return ReactTools.getOwnerInstance($('.' + BdApi.findModuleByProps('unreadMentionBar', 'unreadMentionsBar', 'wrapper').wrapper.replace(/ /g, '.'))[0]).props.guilds.map(o => o.guild);
   }
   
   get defaultSettings() {
